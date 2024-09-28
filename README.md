@@ -6,10 +6,10 @@ This is a simple PHP RESTful API for managing employee data. The API allows you 
 **Employee Management API**
 
 ## Website
-Visit for whole instruction : [https://docs.google.com/document/d/1ApVI0Lue2hgxE6yhT7yt3vaWxici0VCh/edit](https://docs.google.com/document/d/1ApVI0Lue2hgxE6yhT7yt3vaWxici0VCh/edit)
+Step by step instruction guide : [https://docs.google.com/document/d/1ApVI0Lue2hgxE6yhT7yt3vaWxici0VCh/edit](https://docs.google.com/document/d/1ApVI0Lue2hgxE6yhT7yt3vaWxici0VCh/edit)
 
 ## Website
-Visit our website for more information: [https://krishnendudalui.in.net/PHI_API_PROVIDER](https://krishnendudalui.in.net/PHI_API_PROVIDER)
+Watch Live Visit our website : [https://krishnendudalui.in.net/PHI_API_PROVIDER](https://krishnendudalui.in.net/PHI_API_PROVIDER)
 
 ## Table of Contents
 - [Requirements](#requirements)
