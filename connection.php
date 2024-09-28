@@ -32,18 +32,33 @@ class dbObj
         
         // Check connection
         if (!$con) {
-            die("Connection failed: " . mysqli_connect_error());
+            $this->logError(mysqli_connect_errno(), mysqli_connect_error()); // Log the error
+            return false; // Return false if connection fails
         }
 
         $this->conn = $con;
         return $this->conn;
+    }
+
+    // Function to log errors
+    private function logError($code, $message)
+    {
+        $log_message = "[" . date("Y-m-d H:i:s") . "] Error Code: $code, Message: $message" . PHP_EOL;
+        file_put_contents('db_errors.log', $log_message, FILE_APPEND);
     }
 }
 
 // Test connection
 $db = new dbObj();
 $conn = $db->getConnstring();
+
 if ($conn) {
     echo "Connected successfully!";
+} else {
+    // If connection fails, retrieve the last error
+    $error_message = mysqli_connect_error();
+    $error_code = mysqli_connect_errno();
+    
+    echo "Connection failed: Error Code: $error_code, Message: $error_message";
 }
 ?>
