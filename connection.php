@@ -40,10 +40,10 @@ class dbObj
     }
 }
 
-// // Test connection
-// $db = new dbObj();
-// $conn = $db->getConnstring();
-// if ($conn) {
-//     echo "Connected successfully!";
-// }
-// ?>
+// Test connection
+$db = new dbObj();
+$conn = $db->getConnstring();
+if ($conn) {
+    echo "Connected successfully!";
+}
+?>
