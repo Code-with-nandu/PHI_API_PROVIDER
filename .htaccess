@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^employee/?$ employee.php [NC,L]
+RewriteRule ^employee/([0-9]+)/?$ employee.php?id=$1 [NC,L]
