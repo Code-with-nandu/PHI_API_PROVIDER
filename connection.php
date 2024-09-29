@@ -42,16 +42,16 @@ class dbObj
     }
 }
 
-// Test connection
-$db = new dbObj();
-$conn = $db->getConnstring();
+// // Test connection
+// $db = new dbObj();
+// $conn = $db->getConnstring();
 
-if ($conn) {
-    echo "Connected successfully!";
-} else {
-    $error_message = mysqli_connect_error();
-    $error_code = mysqli_connect_errno();
+// if ($conn) {
+//     echo "Connected successfully!";
+// } else {
+//     $error_message = mysqli_connect_error();
+//     $error_code = mysqli_connect_errno();
     
-    echo "Connection failed: Error Code: $error_code, Message: $error_message";
-}
-?>
+//     echo "Connection failed: Error Code: $error_code, Message: $error_message";
+// }
+// ?>
