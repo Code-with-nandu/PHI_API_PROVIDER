@@ -1,27 +1,21 @@
 <?php
-// Enable error reporting
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
 class dbObj
 {
-    private $environment = 'live'; // Change to 'live' for production
-    private $servername;
-    private $username;
-    private $password;
-    private $dbname = "employee"; // Your database name
-    public $conn;
+    var $servername;
+    var $username;
+    var $password;
+    var $dbname = "employee"; // Your database name
+    var $conn;
 
-    function __construct()
+    function __construct($environment = 'local')
     {
-        if ($this->environment === 'local') {
-            $this->servername = "localhost"; // Localhost
+        if ($environment === 'local') {
+            $this->servername = "localhost";
             $this->username = "root"; // Local MySQL username
             $this->password = ''; // Local MySQL password
         } else {
-            // $this->servername = "18.206.58.178"; // Your EC2 public IP or RDS endpoint
-            $this->servername = "localhost";
+            // For live environment
+            $this->servername = "localhost"; // Change to your live server IP or domain
             $this->username = "root"; // Live MySQL username
             $this->password = 'D@2015$yuti'; // Live MySQL password
         }
@@ -29,21 +23,26 @@ class dbObj
 
     function getConnstring()
     {
-        // Establish connection
-        $con = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname);
-        
-        // Check connection
-        if (!$con) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
+        $con = mysqli_connect($this->servername, $this->username, $this->password, $this->dbname) 
+            or die("Connection failed: " . mysqli_connect_error());
 
-        $this->conn = $con;
+        /* check connection */
+        if (mysqli_connect_errno()) {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        } else {
+            $this->conn = $con;
+        }
         return $this->conn;
     }
 }
 
-// // Test connection
-// $db = new dbObj();
+// Determine the environment
+$isLocal = true; // Set to false when deploying to live
+$environment = $isLocal ? 'local' : 'live';
+
+// Test connection
+// $db = new dbObj($environment);
 // $conn = $db->getConnstring();
 
 // if ($conn) {
@@ -54,4 +53,4 @@ class dbObj
     
 //     echo "Connection failed: Error Code: $error_code, Message: $error_message";
 // }
-// ?>
+?>

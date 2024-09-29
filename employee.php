@@ -1,16 +1,16 @@
 <?php
 include("connection.php");  // Include the connection file
-// include("auth.php");
+include("auth.php");
 
-// // Auth Start
-// $auth = new authObj();
-// $isAuthorized = $auth->authenticate();
-// if(!$isAuthorized)
-// {
-// 	header("HTTP/1.0 401");
-// 	exit;
-// }
-// // Auth End
+// Auth Start
+$auth = new authObj();
+$isAuthorized = $auth->authenticate();
+if(!$isAuthorized)
+{
+	header("HTTP/1.0 401");
+	exit;
+}
+// Auth End
 // Create a new instance of the dbobj class and get the connection
 $db = new dbobj();
 $conn = $db->getConnstring();  // Store the connection object
