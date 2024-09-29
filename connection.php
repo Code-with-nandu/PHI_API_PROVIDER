@@ -1,9 +1,12 @@
 <?php
+// Enable error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 class dbObj
 {
-    // Default environment (change to 'live' for production)
-    private $environment = 'local'; // Change this to 'live' when deploying
-
+    private $environment = 'live'; // Change to 'live' for production
     private $servername;
     private $username;
     private $password;
@@ -13,13 +16,12 @@ class dbObj
     function __construct()
     {
         if ($this->environment === 'local') {
-            // Local server credentials
             $this->servername = "localhost"; // Localhost
             $this->username = "root"; // Local MySQL username
             $this->password = ''; // Local MySQL password
         } else {
-            // Live server credentials
-            $this->servername = "18.206.58.178"; // Your EC2 public IP or RDS endpoint
+            // $this->servername = "18.206.58.178"; // Your EC2 public IP or RDS endpoint
+            $this->servername = "localhost";
             $this->username = "root"; // Live MySQL username
             $this->password = 'D@2015$yuti'; // Live MySQL password
         }
@@ -32,19 +34,11 @@ class dbObj
         
         // Check connection
         if (!$con) {
-            $this->logError(mysqli_connect_errno(), mysqli_connect_error()); // Log the error
-            return false; // Return false if connection fails
+            die("Connection failed: " . mysqli_connect_error());
         }
 
         $this->conn = $con;
         return $this->conn;
-    }
-
-    // Function to log errors
-    private function logError($code, $message)
-    {
-        $log_message = "[" . date("Y-m-d H:i:s") . "] Error Code: $code, Message: $message" . PHP_EOL;
-        file_put_contents('db_errors.log', $log_message, FILE_APPEND);
     }
 }
 
@@ -55,7 +49,6 @@ $conn = $db->getConnstring();
 if ($conn) {
     echo "Connected successfully!";
 } else {
-    // If connection fails, retrieve the last error
     $error_message = mysqli_connect_error();
     $error_code = mysqli_connect_errno();
     
